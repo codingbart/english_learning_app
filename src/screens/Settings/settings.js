@@ -1,15 +1,120 @@
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
 
 export default function SettingsScreen() {
+  const [newName, setNewName] = useState('');
+  const [isNameChanging, setIsNameChanging] = useState(false);
+
+  const handleChangeName = () => {
+    setIsNameChanging(true);
+  };
+
+  const handleSaveName = () => {
+    if (newName.trim() === '') {
+      Alert.alert('Error', 'Please enter a valid name.');
+      return;
+    }
+    Alert.alert('Success', `Your name has been changed to ${newName}`);
+    setIsNameChanging(false);
+    setNewName('');
+  };
+
+  const handleToggleDarkMode = () => {
+    Alert.alert('Toggle Dark Mode', 'Dark mode toggled.');
+  };
+
+  const handleChangeProfilePicture = () => {
+    Alert.alert('Change Profile Picture', 'You can change your profile picture here.');
+  };
+
+  const handleResetStats = () => {
+    Alert.alert('Reset Stats', 'Your achievements and stats have been reset.');
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Settings</Text>
-      <Button title="Change Name" onPress={() => alert('Change name clicked')} />
-      <Button title="Toggle Dark Mode" onPress={() => alert('Dark mode toggled')} />
+      <Text style={styles.header}>Settings</Text>
+      
+      {isNameChanging ? (
+        <View style={styles.formContainer}>
+          <TextInput
+            value={newName}
+            onChangeText={setNewName}
+            placeholder="Enter new name"
+            style={styles.input}
+          />
+          <TouchableOpacity style={styles.button} onPress={handleSaveName}>
+            <Text style={styles.buttonText}>Save Name</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleChangeName}>
+            <Text style={styles.buttonText}>Change Name</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleToggleDarkMode}>
+            <Text style={styles.buttonText}>Toggle Dark Mode</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleChangeProfilePicture}>
+            <Text style={styles.buttonText}>Change Profile Picture</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleResetStats}>
+            <Text style={styles.buttonText}>Reset Stats and Achievements</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f9f9f9',
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: '#448AFF', // White background for header
+    paddingVertical: 12,
+    borderRadius: 12, // Rounded corners for header
+    width: '100%',
+    marginBottom: 30,
+  },
+  buttonContainer: {
+    width: '80%',
+    marginTop: 20,
+  },
+  formContainer: {
+    width: '80%',
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#82b1ff',
+    borderRadius: 10, // Rounded corners for buttons
+    paddingVertical: 15,
+    marginBottom: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 10, // Rounded corners for input
+    marginBottom: 15,
+    fontSize: 16,
+    backgroundColor: '#fff', // Background color for input
+  },
 });
