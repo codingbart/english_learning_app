@@ -2,18 +2,18 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function LoginScreen({ navigation }) {
-  const handleLogin = () => {
-    navigation.replace('Langly'); 
-  };
+export default function RegisterScreen({navigation}){
+   const handleRegister = () =>{
+        navigation.replace('Langly');
+   };
 
-  const handleRegister = () => {
-    navigation.replace('Register');
-  };
+   const handleLogin = () =>{
+        navigation.replace('Login');
+   };
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
+   const [passwordVisible, setPasswordVisible] = useState(false);
   
-  return (
+   return (
     <View style={styles.container}>
 
       <View style={styles.imageContainer}>
@@ -21,9 +21,12 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <Text style={styles.title}>Welcome to Langly</Text>
-      <Text style={styles.subtitle}>Please login to your account to continue</Text>
+      <Text style={styles.subtitle}>Please register to your account to continue</Text>
 
- 
+      <View style={styles.inputContainer}>
+        <Icon name="account-circle" size={20} color="#777" style={styles.icon} />
+        <TextInput placeholder="Username" style={styles.input} />
+      </View>
       <View style={styles.inputContainer}>
         <Icon name="email-outline" size={20} color="#777" style={styles.icon} />
         <TextInput placeholder="Email" style={styles.input} />
@@ -31,18 +34,18 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.inputContainer}>
         <Icon name="lock-outline" size={20} color="#777" style={styles.icon} />
         <TextInput placeholder="Password" style={styles.input} secureTextEntry={!passwordVisible} />
-        <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-          <Icon name ={passwordVisible ? 'eye-off':'eye'} size={20} color="#777" style={styles.icon}/>
+        <TouchableOpacity onPress={()=>setPasswordVisible(!passwordVisible)}>
+            <Icon name={passwordVisible ? 'eye-off': 'eye'} size={20} color="#777" style={styles.icon} />
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginText}>Login</Text>
+      <TouchableOpacity style={styles.loginButton} onPress={handleRegister}>
+        <Text style={styles.loginText}>Register</Text>
       </TouchableOpacity>
 
 
-      <TouchableOpacity onPress={handleRegister}>
-        <Text style={styles.createAccount}>Create a new account</Text>
+      <TouchableOpacity onPress={handleLogin}>
+        <Text style={styles.createAccount}>Already have an account? Sign in!</Text>
       </TouchableOpacity>
     </View>
   );
@@ -109,3 +112,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
+
+

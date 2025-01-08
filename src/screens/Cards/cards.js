@@ -14,11 +14,8 @@ export default function CardsScreen() {
     <View style={styles.container}>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => alert('umiem')}>
-          <Text style={styles.buttonText}>Umiem</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => alert('nie umiem')}>
-          <Text style={styles.buttonText}>Nie umiem</Text>
+        <TouchableOpacity style={styles.button} onPress={() => alert('nastepna fiszka')}>
+          <Text style={styles.buttonText}>Następna fiszka</Text>
         </TouchableOpacity>
       </View>
 
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   card: {

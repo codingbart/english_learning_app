@@ -11,6 +11,16 @@ export default function DictionaryScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, width: '80%', marginVertical: 10 },
+  container: { 
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: { 
+    borderWidth: 1, 
+    borderColor: '#ccc', 
+    padding: 10, 
+    width: '80%', 
+    marginVertical: 10,
+  },
 });

@@ -1,8 +1,9 @@
-import { StyleSheet, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 export default function StatsScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text style={styles.header}>Statistics</Text>
 
       <View style={styles.statsContainer}>
@@ -17,17 +18,19 @@ export default function StatsScreen() {
         <Text style={styles.statText}>- Beginner (Completed 10 quizzes)</Text>
         <Text style={styles.statText}>- Flashcard Master (Learned 50 flashcards)</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1, // Ensure it fills the available space
+    backgroundColor: '#f9f9f9',
+  },
+  contentContainer:{
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f9f9f9',
   },
   header: {
     fontSize: 24,
