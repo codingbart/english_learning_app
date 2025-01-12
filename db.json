@@ -6,61 +6,318 @@
       "password": "123",
       "name": "Bartek",
       "profilePicture": "profile1.jpg"
-    },
-    {
-      "id": "2",
-      "email": "456",
-      "password": "456",
-      "name": "Alice",
-      "profilePicture": "profile2.jpg"
-    },
-    {
-      "id": "38a3",
-      "email": "Kacper",
-      "password": "kacper",
-      "name": "Kacper"
-    },
-    {
-      "id": "4044",
-      "email": "444",
-      "password": "444",
-      "name": "444"
-    },
-    {
-      "id": "a3ae",
-      "email": "Lisek@wp.pl",
-      "password": "123",
-      "name": "Lisek"
     }
   ],
   "flashcards": [
     {
       "id": "1",
-      "word": "cat",
-      "translation": "kot",
+      "word": "Cat",
+      "translation": "Kot",
       "isKnown": false
     },
     {
       "id": "2",
-      "word": "dog",
-      "translation": "pies",
+      "word": "Dog",
+      "translation": "Pies",
       "isKnown": true
     },
     {
       "id": "3",
-      "word": "cock",
-      "translation": "kogut",
+      "word": "Cock",
+      "translation": "Kogut",
       "isKnown": true
     },
     {
       "id": "70d8",
       "word": "Mleko",
-      "translation": "milk"
+      "translation": "Milk"
     },
     {
       "id": "5e74",
       "word": "Cucumber",
       "translation": "Ogórek"
+    },
+    {
+      "id": "4",
+      "word": "Apple",
+      "translation": "Jabłko",
+      "isKnown": false
+    },
+    {
+      "id": "5",
+      "word": "Banana",
+      "translation": "Banan",
+      "isKnown": true
+    },
+    {
+      "id": "6",
+      "word": "Grape",
+      "translation": "Winogrono",
+      "isKnown": false
+    },
+    {
+      "id": "7",
+      "word": "Orange",
+      "translation": "Pomarańcza",
+      "isKnown": true
+    },
+    {
+      "id": "8",
+      "word": "Pear",
+      "translation": "Gruszka",
+      "isKnown": false
+    },
+    {
+      "id": "9",
+      "word": "Peach",
+      "translation": "Brzoskwinia",
+      "isKnown": true
+    },
+    {
+      "id": "10",
+      "word": "Plum",
+      "translation": "Śliwka",
+      "isKnown": false
+    },
+    {
+      "id": "11",
+      "word": "Strawberry",
+      "translation": "Truskawka",
+      "isKnown": true
+    },
+    {
+      "id": "12",
+      "word": "Watermelon",
+      "translation": "Arbuz",
+      "isKnown": false
+    },
+    {
+      "id": "13",
+      "word": "Lemon",
+      "translation": "Cytryna",
+      "isKnown": true
+    },
+    {
+      "id": "14",
+      "word": "Lime",
+      "translation": "Limonka",
+      "isKnown": false
+    },
+    {
+      "id": "15",
+      "word": "Cherry",
+      "translation": "Wiśnia",
+      "isKnown": true
+    },
+    {
+      "id": "16",
+      "word": "Blueberry",
+      "translation": "Borówka",
+      "isKnown": false
+    },
+    {
+      "id": "17",
+      "word": "Raspberry",
+      "translation": "Malina",
+      "isKnown": true
+    },
+    {
+      "id": "18",
+      "word": "Blackberry",
+      "translation": "Jeżyna",
+      "isKnown": false
+    },
+    {
+      "id": "19",
+      "word": "Pineapple",
+      "translation": "Ananas",
+      "isKnown": true
+    },
+    {
+      "id": "20",
+      "word": "Mango",
+      "translation": "Mango",
+      "isKnown": false
+    },
+    {
+      "id": "21",
+      "word": "Kiwi",
+      "translation": "Kiwi",
+      "isKnown": true
+    },
+    {
+      "id": "22",
+      "word": "Papaya",
+      "translation": "Papaja",
+      "isKnown": false
+    },
+    {
+      "id": "23",
+      "word": "Avocado",
+      "translation": "Awokado",
+      "isKnown": true
+    },
+    {
+      "id": "24",
+      "word": "Carrot",
+      "translation": "Marchewka",
+      "isKnown": false
+    },
+    {
+      "id": "25",
+      "word": "Potato",
+      "translation": "Ziemniak",
+      "isKnown": true
+    },
+    {
+      "id": "26",
+      "word": "Tomato",
+      "translation": "Pomidor",
+      "isKnown": false
+    },
+    {
+      "id": "27",
+      "word": "Onion",
+      "translation": "Cebula",
+      "isKnown": true
+    },
+    {
+      "id": "28",
+      "word": "Garlic",
+      "translation": "Czosnek",
+      "isKnown": false
+    },
+    {
+      "id": "29",
+      "word": "Pepper",
+      "translation": "Papryka",
+      "isKnown": true
+    },
+    {
+      "id": "30",
+      "word": "Lettuce",
+      "translation": "Sałata",
+      "isKnown": false
+    },
+    {
+      "id": "31",
+      "word": "Cabbage",
+      "translation": "Kapusta",
+      "isKnown": true
+    },
+    {
+      "id": "32",
+      "word": "Broccoli",
+      "translation": "Brokuł",
+      "isKnown": false
+    },
+    {
+      "id": "33",
+      "word": "Cauliflower",
+      "translation": "Kalafior",
+      "isKnown": true
+    },
+    {
+      "id": "34",
+      "word": "Spinach",
+      "translation": "Szpinak",
+      "isKnown": false
+    },
+    {
+      "id": "35",
+      "word": "Zucchini",
+      "translation": "Cukinia",
+      "isKnown": true
+    },
+    {
+      "id": "36",
+      "word": "Eggplant",
+      "translation": "Bakłażan",
+      "isKnown": false
+    },
+    {
+      "id": "37",
+      "word": "Pumpkin",
+      "translation": "Dynia",
+      "isKnown": true
+    },
+    {
+      "id": "38",
+      "word": "Corn",
+      "translation": "Kukurydza",
+      "isKnown": false
+    },
+    {
+      "id": "39",
+      "word": "Pea",
+      "translation": "Groszek",
+      "isKnown": true
+    },
+    {
+      "id": "40",
+      "word": "Bean",
+      "translation": "Fasola",
+      "isKnown": false
+    },
+    {
+      "id": "41",
+      "word": "Mushroom",
+      "translation": "Grzyb",
+      "isKnown": true
+    },
+    {
+      "id": "42",
+      "word": "Cucumber",
+      "translation": "Ogórek",
+      "isKnown": false
+    },
+    {
+      "id": "43",
+      "word": "Celery",
+      "translation": "Seler",
+      "isKnown": true
+    },
+    {
+      "id": "44",
+      "word": "Radish",
+      "translation": "Rzodkiewka",
+      "isKnown": false
+    },
+    {
+      "id": "45",
+      "word": "Beetroot",
+      "translation": "Burak",
+      "isKnown": true
+    },
+    {
+      "id": "46",
+      "word": "Turnip",
+      "translation": "Rzepa",
+      "isKnown": false
+    },
+    {
+      "id": "47",
+      "word": "Parsnip",
+      "translation": "Pietruszka",
+      "isKnown": true
+    },
+    {
+      "id": "48",
+      "word": "Leek",
+      "translation": "Por",
+      "isKnown": false
+    },
+    {
+      "id": "49",
+      "word": "Ginger",
+      "translation": "Imbir",
+      "isKnown": true
+    },
+    {
+      "id": "50",
+      "word": "Turmeric",
+      "translation": "Kurkuma",
+      "isKnown": false
     }
   ],
   "irregularVerbs": [
@@ -68,13 +325,232 @@
       "id": "1",
       "baseForm": "go",
       "pastSimple": "went",
+      "pastParticiple": "gone",
       "translation": "iść"
     },
     {
       "id": "2",
       "baseForm": "be",
       "pastSimple": "was/were",
+      "pastParticiple": "been",
       "translation": "być"
+    },
+    {
+      "id": "3",
+      "baseForm": "begin",
+      "pastSimple": "began",
+      "pastParticiple": "begun",
+      "translation": "zaczynać"
+    },
+    {
+      "id": "4",
+      "baseForm": "break",
+      "pastSimple": "broke",
+      "pastParticiple": "broken",
+      "translation": "łamać"
+    },
+    {
+      "id": "5",
+      "baseForm": "bring",
+      "pastSimple": "brought",
+      "pastParticiple": "brought",
+      "translation": "przynosić"
+    },
+    {
+      "id": "6",
+      "baseForm": "build",
+      "pastSimple": "built",
+      "pastParticiple": "built",
+      "translation": "budować"
+    },
+    {
+      "id": "7",
+      "baseForm": "buy",
+      "pastSimple": "bought",
+      "pastParticiple": "bought",
+      "translation": "kupować"
+    },
+    {
+      "id": "8",
+      "baseForm": "catch",
+      "pastSimple": "caught",
+      "pastParticiple": "caught",
+      "translation": "łapać"
+    },
+    {
+      "id": "9",
+      "baseForm": "choose",
+      "pastSimple": "chose",
+      "pastParticiple": "chosen",
+      "translation": "wybierać"
+    },
+    {
+      "id": "10",
+      "baseForm": "come",
+      "pastSimple": "came",
+      "pastParticiple": "come",
+      "translation": "przychodzić"
+    },
+    {
+      "id": "11",
+      "baseForm": "do",
+      "pastSimple": "did",
+      "pastParticiple": "done",
+      "translation": "robić"
+    },
+    {
+      "id": "12",
+      "baseForm": "drink",
+      "pastSimple": "drank",
+      "pastParticiple": "drunk",
+      "translation": "pić"
+    },
+    {
+      "id": "13",
+      "baseForm": "drive",
+      "pastSimple": "drove",
+      "pastParticiple": "driven",
+      "translation": "prowadzić"
+    },
+    {
+      "id": "14",
+      "baseForm": "eat",
+      "pastSimple": "ate",
+      "pastParticiple": "eaten",
+      "translation": "jeść"
+    },
+    {
+      "id": "15",
+      "baseForm": "fall",
+      "pastSimple": "fell",
+      "pastParticiple": "fallen",
+      "translation": "upadać"
+    },
+    {
+      "id": "16",
+      "baseForm": "feel",
+      "pastSimple": "felt",
+      "pastParticiple": "felt",
+      "translation": "czuć"
+    },
+    {
+      "id": "17",
+      "baseForm": "find",
+      "pastSimple": "found",
+      "pastParticiple": "found",
+      "translation": "znajdować"
+    },
+    {
+      "id": "18",
+      "baseForm": "fly",
+      "pastSimple": "flew",
+      "pastParticiple": "flown",
+      "translation": "latać"
+    },
+    {
+      "id": "19",
+      "baseForm": "forget",
+      "pastSimple": "forgot",
+      "pastParticiple": "forgotten",
+      "translation": "zapominać"
+    },
+    {
+      "id": "20",
+      "baseForm": "get",
+      "pastSimple": "got",
+      "pastParticiple": "gotten",
+      "translation": "dostawać"
+    },
+    {
+      "id": "21",
+      "baseForm": "give",
+      "pastSimple": "gave",
+      "pastParticiple": "given",
+      "translation": "dawać"
+    },
+    {
+      "id": "22",
+      "baseForm": "have",
+      "pastSimple": "had",
+      "pastParticiple": "had",
+      "translation": "mieć"
+    },
+    {
+      "id": "23",
+      "baseForm": "hear",
+      "pastSimple": "heard",
+      "pastParticiple": "heard",
+      "translation": "słyszeć"
+    },
+    {
+      "id": "24",
+      "baseForm": "know",
+      "pastSimple": "knew",
+      "pastParticiple": "known",
+      "translation": "wiedzieć"
+    },
+    {
+      "id": "25",
+      "baseForm": "leave",
+      "pastSimple": "left",
+      "pastParticiple": "left",
+      "translation": "opuszczać"
+    },
+    {
+      "id": "26",
+      "baseForm": "make",
+      "pastSimple": "made",
+      "pastParticiple": "made",
+      "translation": "robić"
+    },
+    {
+      "id": "27",
+      "baseForm": "meet",
+      "pastSimple": "met",
+      "pastParticiple": "met",
+      "translation": "spotykać"
+    },
+    {
+      "id": "28",
+      "baseForm": "pay",
+      "pastSimple": "paid",
+      "pastParticiple": "paid",
+      "translation": "płacić"
+    },
+    {
+      "id": "29",
+      "baseForm": "read",
+      "pastSimple": "read",
+      "pastParticiple": "read",
+      "translation": "czytać"
+    },
+    {
+      "id": "30",
+      "baseForm": "run",
+      "pastSimple": "ran",
+      "pastParticiple": "run",
+      "translation": "biegać"
+    },
+    {
+      "id": "31",
+      "baseForm": "say",
+      "pastSimple": "said",
+      "pastParticiple": "said",
+      "translation": "mówić"
+    },
+    {
+      "id": "32",
+      "baseForm": "see",
+      "pastSimple": "saw",
+      "pastParticiple": "seen",
+      "translation": "widzieć"
+    },
+    {
+      "id": "33",
+      "baseForm": "sell",
+      "pastSimple": "sold",
+      "pastParticiple": "sold",
+      "translation": "sprzedawać"
     }
   ],
   "dictionary": [
@@ -87,6 +563,161 @@
       "id": "2",
       "word": "Table",
       "translation": "Stół"
+    },
+    {
+      "id": "3",
+      "word": "Book",
+      "translation": "Książka"
+    },
+    {
+      "id": "4",
+      "word": "Chair",
+      "translation": "Krzesło"
+    },
+    {
+      "id": "5",
+      "word": "House",
+      "translation": "Dom"
+    },
+    {
+      "id": "6",
+      "word": "Car",
+      "translation": "Samochód"
+    },
+    {
+      "id": "7",
+      "word": "Dog",
+      "translation": "Pies"
+    },
+    {
+      "id": "8",
+      "word": "Cat",
+      "translation": "Kot"
+    },
+    {
+      "id": "9",
+      "word": "Tree",
+      "translation": "Drzewo"
+    },
+    {
+      "id": "10",
+      "word": "Water",
+      "translation": "Woda"
+    },
+    {
+      "id": "11",
+      "word": "Food",
+      "translation": "Jedzenie"
+    },
+    {
+      "id": "12",
+      "word": "Computer",
+      "translation": "Komputer"
+    },
+    {
+      "id": "13",
+      "word": "Phone",
+      "translation": "Telefon"
+    },
+    {
+      "id": "14",
+      "word": "Window",
+      "translation": "Okno"
+    },
+    {
+      "id": "15",
+      "word": "Door",
+      "translation": "Drzwi"
+    },
+    {
+      "id": "16",
+      "word": "Pen",
+      "translation": "Długopis"
+    },
+    {
+      "id": "17",
+      "word": "Pencil",
+      "translation": "Ołówek"
+    },
+    {
+      "id": "18",
+      "word": "Notebook",
+      "translation": "Zeszyt"
+    },
+    {
+      "id": "19",
+      "word": "School",
+      "translation": "Szkoła"
+    },
+    {
+      "id": "20",
+      "word": "Teacher",
+      "translation": "Nauczyciel"
+    },
+    {
+      "id": "21",
+      "word": "Student",
+      "translation": "Uczeń"
+    },
+    {
+      "id": "22",
+      "word": "City",
+      "translation": "Miasto"
+    },
+    {
+      "id": "23",
+      "word": "Country",
+      "translation": "Kraj"
+    },
+    {
+      "id": "24",
+      "word": "Mountain",
+      "translation": "Góra"
+    },
+    {
+      "id": "25",
+      "word": "River",
+      "translation": "Rzeka"
+    },
+    {
+      "id": "26",
+      "word": "Ocean",
+      "translation": "Ocean"
+    },
+    {
+      "id": "27",
+      "word": "Sun",
+      "translation": "Słońce"
+    },
+    {
+      "id": "28",
+      "word": "Moon",
+      "translation": "Księżyc"
+    },
+    {
+      "id": "29",
+      "word": "Star",
+      "translation": "Gwiazda"
+    },
+    {
+      "id": "30",
+      "word": "Sky",
+      "translation": "Niebo"
+    },
+    {
+      "id": "31",
+      "word": "Flower",
+      "translation": "Kwiat"
+    },
+    {
+      "id": "32",
+      "word": "Grass",
+      "translation": "Trawa"
+    },
+    {
+      "id": "33",
+      "word": "Forest",
+      "translation": "Las"
     }
   ],
   "quizzes": [

@@ -1,20 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import API from '../../api/config';
 
-const irregularVerbs = [
-  { base: 'Go', past: 'Went', pastParticiple: 'Gone', translation: 'Iść' },
-  { base: 'Be', past: 'Was/Were', pastParticiple: 'Been', translation: 'Być' },
-  { base: 'Have', past: 'Had', pastParticiple: 'Had', translation: 'Mieć' },
-  { base: 'Eat', past: 'Ate', pastParticiple: 'Eaten', translation: 'Jeść' },
-  { base: 'Take', past: 'Took', pastParticiple: 'Taken', translation: 'Brać' },
+const irregularVerbs = async () => [
+  
 ];
 
-export default function IrregularsScreen() {
+function IrregularsScreen() {
+  
+  const[irregularVerbs, setIrregularVerbs] = useState([]);
+
+  useEffect(() => {
+    const fetchIrregularVerbs = async () => {
+      try {
+        const response = await API.get('/irregularVerbs');
+        setIrregularVerbs(response.data);
+      } catch (error) {
+        console.error('Error fetching irregular verbs:', error);
+        Alert.alert('Nie udało się pobrać danych. Spróbuj ponownie.');
+      }
+    };
+
+    fetchIrregularVerbs();
+  }, []);
+
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <Text style={styles.cardText}>Czasownik: {item.base}</Text>
-      <Text style={styles.cardText}>Czas przeszły: {item.past}</Text>
+      <Text style={styles.cardText}>Czasownik: {item.baseForm}</Text>
+      <Text style={styles.cardText}>Czas przeszły: {item.pastSimple}</Text>
       <Text style={styles.cardText}>Czasownik w III formie: {item.pastParticiple}</Text>
       <Text style={styles.cardText}>Tłumaczenie: {item.translation}</Text>
     </View>
@@ -34,12 +48,12 @@ export default function IrregularsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 200, // Dodać przestrzeń na górze ekranu, aby nie przykrywać nagłówka statusu
-      },
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: 200, // Dodać przestrzeń na górze ekranu, aby nie przykrywać nagłówka statusu
+    },
   card: {
     backgroundColor: '#fff',
     borderRadius: 10,
@@ -61,3 +75,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default IrregularsScreen;
