@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "123",
       "password": "123",
       "name": "Bartek",
       "profilePicture": "profile1.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "456",
       "password": "456",
       "name": "Alice",
@@ -25,23 +25,29 @@
       "email": "444",
       "password": "444",
       "name": "444"
+    },
+    {
+      "id": "a3ae",
+      "email": "Lisek@wp.pl",
+      "password": "123",
+      "name": "Lisek"
     }
   ],
   "flashcards": [
     {
-      "id": 1,
+      "id": "1",
       "word": "cat",
       "translation": "kot",
       "isKnown": false
     },
     {
-      "id": 2,
+      "id": "2",
       "word": "dog",
       "translation": "pies",
       "isKnown": true
     },
     {
-      "id": 3,
+      "id": "3",
       "word": "cock",
       "translation": "kogut",
       "isKnown": true
@@ -59,13 +65,13 @@
   ],
   "irregularVerbs": [
     {
-      "id": 1,
+      "id": "1",
       "baseForm": "go",
       "pastSimple": "went",
       "translation": "iść"
     },
     {
-      "id": 2,
+      "id": "2",
       "baseForm": "be",
       "pastSimple": "was/were",
       "translation": "być"
@@ -73,19 +79,19 @@
   ],
   "dictionary": [
     {
-      "id": 1,
-      "word": "apple",
-      "translation": "jabłko"
+      "id": "1",
+      "word": "Apple",
+      "translation": "Jabłko"
     },
     {
-      "id": 2,
-      "word": "table",
-      "translation": "stół"
+      "id": "2",
+      "word": "Table",
+      "translation": "Stół"
     }
   ],
   "quizzes": [
     {
-      "id": 1,
+      "id": "1",
       "question": "What is the translation of 'kot'?",
       "options": [
         "cat",
@@ -96,7 +102,7 @@
       "correctAnswer": "cat"
     },
     {
-      "id": 2,
+      "id": "2",
       "question": "What is the translation of 'pies'?",
       "options": [
         "fish",
@@ -109,13 +115,13 @@
   ],
   "achievements": [
     {
-      "id": 1,
+      "id": "1",
       "name": "First Quiz",
       "description": "Complete your first quiz",
       "isUnlocked": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Flashcard Master",
       "description": "Learn 10 flashcards",
       "isUnlocked": false
