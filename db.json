@@ -1,0 +1,130 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "123",
+      "password": "123",
+      "name": "Bartek",
+      "profilePicture": "profile1.jpg"
+    },
+    {
+      "id": 2,
+      "email": "456",
+      "password": "456",
+      "name": "Alice",
+      "profilePicture": "profile2.jpg"
+    },
+    {
+      "id": "38a3",
+      "email": "Kacper",
+      "password": "kacper",
+      "name": "Kacper"
+    },
+    {
+      "id": "4044",
+      "email": "444",
+      "password": "444",
+      "name": "444"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": 1,
+      "word": "cat",
+      "translation": "kot",
+      "isKnown": false
+    },
+    {
+      "id": 2,
+      "word": "dog",
+      "translation": "pies",
+      "isKnown": true
+    },
+    {
+      "id": 3,
+      "word": "cock",
+      "translation": "kogut",
+      "isKnown": true
+    },
+    {
+      "id": "70d8",
+      "word": "Mleko",
+      "translation": "milk"
+    },
+    {
+      "id": "5e74",
+      "word": "Cucumber",
+      "translation": "Ogórek"
+    }
+  ],
+  "irregularVerbs": [
+    {
+      "id": 1,
+      "baseForm": "go",
+      "pastSimple": "went",
+      "translation": "iść"
+    },
+    {
+      "id": 2,
+      "baseForm": "be",
+      "pastSimple": "was/were",
+      "translation": "być"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": 1,
+      "word": "apple",
+      "translation": "jabłko"
+    },
+    {
+      "id": 2,
+      "word": "table",
+      "translation": "stół"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": 1,
+      "question": "What is the translation of 'kot'?",
+      "options": [
+        "cat",
+        "dog",
+        "mouse",
+        "bird"
+      ],
+      "correctAnswer": "cat"
+    },
+    {
+      "id": 2,
+      "question": "What is the translation of 'pies'?",
+      "options": [
+        "fish",
+        "cat",
+        "dog",
+        "bird"
+      ],
+      "correctAnswer": "dog"
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "name": "First Quiz",
+      "description": "Complete your first quiz",
+      "isUnlocked": true
+    },
+    {
+      "id": 2,
+      "name": "Flashcard Master",
+      "description": "Learn 10 flashcards",
+      "isUnlocked": false
+    }
+  ],
+  "stats": {
+    "quizzesTaken": 5,
+    "averageQuizScore": 80,
+    "flashcardsLearned": 10,
+    "flashcardsCompletionRate": 50
+  }
+}

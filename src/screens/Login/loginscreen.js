@@ -1,18 +1,37 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from '../../api/config';
 
 export default function LoginScreen({ navigation }) {
-  const handleLogin = () => {
-    navigation.replace('Langly'); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleLogin = async () => {
+    try{
+      const response = await API.get('/users');
+      const users = response.data;
+
+      const user = users.find((u) => u.email === email && u.password === password);
+      
+      if(user){
+        Alert.alert(`Witaj, ${user.name}`);
+        navigation.replace('Langly');
+      }else {
+        Alert.alert("Nieprawidłowy email lub hasło.");
+      }
+    }catch(error){
+      console.error('Login error:', error);
+      Alert.alert('Bład','Spróbuj ponownie.');
+    }
   };
 
   const handleRegister = () => {
     navigation.replace('Register');
   };
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  
+ 
   return (
     <View style={styles.container}>
 
@@ -26,11 +45,11 @@ export default function LoginScreen({ navigation }) {
  
       <View style={styles.inputContainer}>
         <Icon name="email-outline" size={20} color="#777" style={styles.icon} />
-        <TextInput placeholder="Email" style={styles.input} />
+        <TextInput placeholder="Email" style={styles.input} value={email} onChangeText={setEmail}/>
       </View>
       <View style={styles.inputContainer}>
         <Icon name="lock-outline" size={20} color="#777" style={styles.icon} />
-        <TextInput placeholder="Password" style={styles.input} secureTextEntry={!passwordVisible} />
+        <TextInput placeholder="Password" style={styles.input} secureTextEntry={!passwordVisible} value={password} onChangeText={setPassword}/>
         <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
           <Icon name ={passwordVisible ? 'eye-off':'eye'} size={20} color="#777" style={styles.icon}/>
         </TouchableOpacity>
