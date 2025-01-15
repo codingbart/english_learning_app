@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function HomeScreen() {
+function HomeScreen() {
   const userName = 'Bartek';
   const lastAchievement = '10 Flashcards Completed';
   const recentWords = ['Hello', 'World', 'React', 'Native', 'JavaScript'];
@@ -100,3 +100,5 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+export default HomeScreen;

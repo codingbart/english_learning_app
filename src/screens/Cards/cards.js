@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Alert, TextInput } from 'reac
 import API from '../../api/config';
 
 
-export default function CardsScreen() {
+function CardsScreen() {
   const [isFlipped, setIsFlipped] = useState(false); 
   const [cards, setCards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -203,3 +203,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default CardsScreen;

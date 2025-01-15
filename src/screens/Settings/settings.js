@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
 
-export default function SettingsScreen() {
+function SettingsScreen() {
   const [newName, setNewName] = useState('');
   const [isNameChanging, setIsNameChanging] = useState(false);
 
@@ -118,3 +118,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', // Background color for input
   },
 });
+
+export default SettingsScreen;

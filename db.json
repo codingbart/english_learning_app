@@ -6,6 +6,18 @@
       "password": "123",
       "name": "Bartek",
       "profilePicture": "profile1.jpg"
+    },
+    {
+      "id": "5763",
+      "email": "Adam@123",
+      "password": "123",
+      "name": "Adam"
+    },
+    {
+      "id": "c8d0",
+      "email": "Janas@123",
+      "password": "1234",
+      "name": "Janas"
     }
   ],
   "flashcards": [
@@ -720,28 +732,96 @@
       "translation": "Las"
     }
   ],
-  "quizzes": [
+  "quizQuestions": [
     {
       "id": "1",
-      "question": "What is the translation of 'kot'?",
-      "options": [
-        "cat",
-        "dog",
-        "mouse",
-        "bird"
-      ],
-      "correctAnswer": "cat"
+      "question": "What does 'cat' mean?",
+      "options": ["Pies", "Kot", "Kogut", "Krowa"],
+      "correctOption": 1
     },
     {
       "id": "2",
-      "question": "What is the translation of 'pies'?",
-      "options": [
-        "fish",
-        "cat",
-        "dog",
-        "bird"
-      ],
-      "correctAnswer": "dog"
+      "question": "What does 'dog' mean?",
+      "options": ["Kot", "Pies", "Kogut", "Krowa"],
+      "correctOption": 1
+    },
+    {
+      "id": "3",
+      "question": "What does 'apple' mean?",
+      "options": ["Jabłko", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 0
+    },
+    {
+      "id": "4",
+      "question": "What does 'banana' mean?",
+      "options": ["Jabłko", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 1
+    },
+    {
+      "id": "5",
+      "question": "What does 'grape' mean?",
+      "options": ["Winogrono", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 0
+    },
+    {
+      "id": "6",
+      "question": "What does 'orange' mean?",
+      "options": ["Jabłko", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 3
+    },
+    {
+      "id": "7",
+      "question": "What does 'pear' mean?",
+      "options": ["Jabłko", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 2
+    },
+    {
+      "id": "8",
+      "question": "What does 'peach' mean?",
+      "options": ["Brzoskwinia", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 0
+    },
+    {
+      "id": "9",
+      "question": "What does 'plum' mean?",
+      "options": ["Jabłko", "Śliwka", "Gruszka", "Pomarańcza"],
+      "correctOption": 1
+    },
+    {
+      "id": "10",
+      "question": "What does 'strawberry' mean?",
+      "options": ["Jabłko", "Banan", "Truskawka", "Pomarańcza"],
+      "correctOption": 2
+    },
+    {
+      "id": "11",
+      "question": "What does 'watermelon' mean?",
+      "options": ["Jabłko", "Arbuz", "Gruszka", "Pomarańcza"],
+      "correctOption": 1
+    },
+    {
+      "id": "12",
+      "question": "What does 'lemon' mean?",
+      "options": ["Cytryna", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 0
+    },
+    {
+      "id": "13",
+      "question": "What does 'lime' mean?",
+      "options": ["Jabłko", "Banan", "Limonka", "Pomarańcza"],
+      "correctOption": 2
+    },
+    {
+      "id": "14",
+      "question": "What does 'cherry' mean?",
+      "options": ["Wiśnia", "Banan", "Gruszka", "Pomarańcza"],
+      "correctOption": 0
+    },
+    {
+      "id": "15",
+      "question": "What does 'blueberry' mean?",
+      "options": ["Jabłko", "Borówka", "Gruszka", "Pomarańcza"],
+      "correctOption": 1
     }
   ],
   "achievements": [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
-export default function StatsScreen() {
+function StatsScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text style={styles.header}>Statistics</Text>
@@ -89,3 +89,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default StatsScreen;

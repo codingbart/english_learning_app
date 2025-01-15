@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      paddingTop: 200, // Dodać przestrzeń na górze ekranu, aby nie przykrywać nagłówka statusu
+      paddingTop: 200, 
     },
   card: {
     backgroundColor: '#fff',

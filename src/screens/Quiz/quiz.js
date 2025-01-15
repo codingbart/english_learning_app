@@ -1,20 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import API from '../../api/config';
 
-export default function QuizScreen() {
+function QuizScreen() {
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [correctOption, setCorrectOption] = useState(2);
-  const [currentQuestion, setCurrentQuestion] = useState(2);
+  const [correctOption, setCorrectOption] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
 
-  const options = [
-    'Mysz',
-    'Pies',
-    'Kot',
-    'Jaszczurka',
-  ];
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await API.get('/quizQuestions');
+        setQuestions(response.data);
+      } catch (error) {
+        console.error('Questions error:', error);
+        Alert.alert('Nie udało się pobrać pytań. Spróbuj ponownie.');
+      }
+    };
+
+    fetchQuestions();
+  }, []);
 
   const handleOptionPress = (index) => {
     setSelectedOption(index);
+    const correctOptionIndex = questions[currentQuestionIndex].correctOption;
+    setCorrectOption(correctOptionIndex);
+
+    if (index === correctOptionIndex) {
+      setCorrectAnswers(correctAnswers + 1);
+    } else {
+      setIncorrectAnswers(incorrectAnswers + 1);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedOption(null);
+      setCorrectOption(null);
+    } else {
+      Alert.alert('Koniec quizu', 'Gratulacje, ukończyłeś quiz!');
+    }
+  };
+
+  const handleResetQuiz = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedOption(null);
+    setCorrectOption(null);
+    setCorrectAnswers(0);
+    setIncorrectAnswers(0);
   };
 
   const getButtonStyle = (index) => {
@@ -25,21 +62,16 @@ export default function QuizScreen() {
     return styles.option;
   };
 
-  const formatTime = () => {
-    const minutes = Math.floor(timeRemaining / 60);
-    const seconds = timeRemaining % 60;
-    return `${minutes}m ${seconds}s`;
-  };
+  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <View style={styles.container}>
-
       <View style={styles.questionContainer}>
-        <Text style={styles.questionNumber}>Question {currentQuestion} of 5</Text>
-        <Text style={styles.questionText}>What does 'cat' mean?</Text>
+        <Text style={styles.questionNumber}>Question {currentQuestionIndex + 1} of {questions.length}</Text>
+        <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </View>
 
-      {options.map((option, index) => (
+      {currentQuestion.options.map((option, index) => (
         <TouchableOpacity
           key={index}
           style={getButtonStyle(index)}
@@ -50,10 +82,21 @@ export default function QuizScreen() {
         </TouchableOpacity>
       ))}
 
-      <TouchableOpacity style={styles.nextButton}>
-        <Text style={styles.nextButtonText}>Next Question</Text>
-      </TouchableOpacity>
+      {selectedOption !== null && (
+        <TouchableOpacity style={styles.nextButton} onPress={handleNextQuestion}>
+          <Text style={styles.nextButtonText}>Next Question</Text>
+        </TouchableOpacity>
+      )}
 
+      {currentQuestionIndex === questions.length - 1 && selectedOption !== null && (
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultText}>Prawidłowe odpowiedzi: {correctAnswers}</Text>
+          <Text style={styles.resultText}>Błędne odpowiedzi: {incorrectAnswers}</Text>
+          <TouchableOpacity style={styles.resetButton} onPress={handleResetQuiz}>
+            <Text style={styles.resetButtonText}>Reset Quiz</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -61,62 +104,92 @@ export default function QuizScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    alignItems: 'center',
+    backgroundColor: '#f9f9f9',
+    padding: 20,
   },
   questionContainer: {
-    alignItems: 'center',
     marginBottom: 20,
   },
   questionNumber: {
-    fontSize: 16,
-    color: '#555',
-  },
-  questionText: {
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 5,
+  },
+  questionText: {
+    fontSize: 20,
+    marginVertical: 10,
   },
   option: {
-    backgroundColor: '#E0E0E0',
-    paddingVertical: 15,
+    backgroundColor: '#fff',
+    padding: 15,
     borderRadius: 10,
     marginVertical: 5,
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
   },
   correctOption: {
-    backgroundColor: '#8BC34A',
-    paddingVertical: 15,
+    backgroundColor: '#4CAF50',
+    padding: 15,
     borderRadius: 10,
     marginVertical: 5,
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
   },
   incorrectOption: {
     backgroundColor: '#F44336',
-    paddingVertical: 15,
+    padding: 15,
     borderRadius: 10,
     marginVertical: 5,
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
   },
   optionText: {
-    fontSize: 16,
-    color: '#333',
+    fontSize: 18,
   },
   nextButton: {
-    backgroundColor: '#448AFF',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
+    backgroundColor: '#2196F3',
+    padding: 15,
+    borderRadius: 10,
     marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
   },
   nextButtonText: {
-    color: '#FFF',
-    fontSize: 16,
+    color: '#fff',
+    fontSize: 18,
     fontWeight: 'bold',
   },
-  boldText: {
+  resultContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  resultText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  resetButton: {
+    backgroundColor: '#FF5722',
+    padding: 15,
+    borderRadius: 10,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  resetButtonText: {
+    color: '#fff',
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
+
+export default QuizScreen;

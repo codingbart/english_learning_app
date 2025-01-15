@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import Icon from 'react-native-ico-font-awesome'
 import API from '../../api/config';
 
-export default function DictionaryScreen() {
+function DictionaryScreen() {
   const [word, setWord] = useState('');
   const [translation, setTranslation] = useState('');
   const [isPolishToEnglish, setIsPolishToEnglish] = useState(true);
@@ -121,3 +121,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+export default DictionaryScreen;
