@@ -34,7 +34,8 @@
     "react-native-svg": "^15.8.0",
     "react-native-vector-icons": "^10.2.0",
     "secure-store": "^0.0.1",
-    "update": "^0.7.4"
+    "update": "^0.7.4",
+    "expo-sensors": "~14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

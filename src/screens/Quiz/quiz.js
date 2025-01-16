@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import API from '../../api/config';
+import { useEffect } from 'react';
 
 function QuizScreen() {
   const [questions, setQuestions] = useState([]);

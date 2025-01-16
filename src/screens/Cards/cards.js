@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
 import API from '../../api/config';
+import {Accelerometer} from 'expo-sensors';
 
 
 function CardsScreen() {

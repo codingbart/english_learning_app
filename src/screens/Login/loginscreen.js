@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from '../../api/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ export default function LoginScreen({ navigation }) {
       const user = users.find((u) => u.email === email && u.password === password);
       
       if(user){
+        await AsyncStorage.setItem('userId', user.id);
         Alert.alert(`Witaj, ${user.name}`);
         navigation.replace('Langly');
       }else {

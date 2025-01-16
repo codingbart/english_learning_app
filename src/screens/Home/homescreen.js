@@ -1,13 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, Dimensions, Alert } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from '../../api/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
 
 function HomeScreen() {
-  const userName = 'Bartek';
+  const [userName, setUserName] = useState('');
   const lastAchievement = '10 Flashcards Completed';
   const recentWords = ['Hello', 'World', 'React', 'Native', 'JavaScript'];
   const completionPercentage = 80;
+
+  useEffect(() => {
+    const handleUserName = async () => {
+      try {
+        const userId = await AsyncStorage.getItem('userId');
+        if(userId){
+          const response = await API.get('/users');
+          const users = response.data;
+          const user = users.find((u) => u.id === userId); 
+          if (user) {
+            setUserName(user.name);
+          }
+        }
+      } catch (error) {
+        console.error('User error:', error);
+        Alert.alert('Błąd', 'Spróbuj ponownie.');
+      }
+    };
+
+    handleUserName();
+  }, []);
+
 
   const screenWidth = Dimensions.get('window').width;
 
