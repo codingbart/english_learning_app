@@ -62,6 +62,14 @@ function QuizScreen() {
     return styles.option;
   };
 
+  if (questions.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text>Ładowanie pytań...</Text>
+      </View>
+    );
+  }
+  
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
