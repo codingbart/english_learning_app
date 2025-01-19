@@ -1,15 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import * as React from 'react';
+import { useContext } from 'react';
 import StackNavigator from './StackNav/stacknav';
+import { ThemeProvider, ThemeContext } from './context/ThemeContext';
 
-function App() {
-  return (
-    <NavigationContainer>
-        <StackNavigator/>
-        <StatusBar style="auto" />
-    </NavigationContainer>
-  );
+function MainNavigator() {
+    const { isDarkTheme } = useContext(ThemeContext);
+
+    return (
+        <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+            <StackNavigator />
+            <StatusBar style={isDarkTheme ? "light" : "dark"} />
+        </NavigationContainer>
+    );
 }
 
-export default App;
+export default function App() {
+    return (
+        <ThemeProvider>
+            <MainNavigator />
+        </ThemeProvider>
+    );
+}

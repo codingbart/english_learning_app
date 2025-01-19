@@ -76,7 +76,8 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFBF0',
+    // dark mode conflicts with backgroundColor
+    // backgroundColor: '#FFFBF0',
     padding: 10,
   },
   card: {

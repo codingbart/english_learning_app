@@ -25,7 +25,8 @@ function StatsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // Ensure it fills the available space
-    backgroundColor: '#f9f9f9',
+    // dark mode conflicts with backgroundColor
+    // backgroundColor: '#f9f9f9',
   },
   contentContainer:{
     justifyContent: 'center',

@@ -1,7 +1,10 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 function SettingsScreen() {
+  const { toggleTheme } = useContext(ThemeContext);
+
   const [newName, setNewName] = useState('');
   const [isNameChanging, setIsNameChanging] = useState(false);
 
@@ -20,7 +23,7 @@ function SettingsScreen() {
   };
 
   const handleToggleDarkMode = () => {
-    Alert.alert('Toggle Dark Mode', 'Dark mode toggled.');
+    toggleTheme();
   };
 
   const handleChangeProfilePicture = () => {
@@ -73,7 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f9f9f9',
+    // dark mode conflicts with backgroundColor
+    // backgroundColor: '#f9f9f9',
   },
   header: {
     fontSize: 24,

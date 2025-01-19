@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
+    // dark mode conflicts with backgroundColor
+    // backgroundColor: '#f9f9f9',
     padding: 20,
   },
   questionContainer: {
