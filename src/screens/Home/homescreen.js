@@ -4,13 +4,14 @@ import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from '../../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useNavigation } from '@react-navigation/native';
 
 function HomeScreen() {
+  const navigation = useNavigation();
   const [userName, setUserName] = useState('');
   const [lastQuizScore, setLastQuizScore] = useState(null);
   const recentWords = ['Hello', 'World', 'React', 'Native', 'JavaScript'];
-  const completionPercentage = 80;
+
 
   useEffect(() => {
     const handleUserName = async () => {
@@ -35,6 +36,8 @@ function HomeScreen() {
         const score = await AsyncStorage.getItem('lastQuizScore');
         if (score) {
           setLastQuizScore(JSON.parse(score));
+        }else {
+          setLastQuizScore(null);
         }
       } catch (error) {
         console.error('Error fetching last quiz score:', error);
@@ -43,6 +46,14 @@ function HomeScreen() {
 
     handleUserName();
     fetchLastQuizScore();
+
+    const focusListener = navigation.addListener('focus', () => {
+      fetchLastQuizScore();
+    });
+
+    return () => {
+      focusListener();
+    }
   }, [lastQuizScore]);
 
 

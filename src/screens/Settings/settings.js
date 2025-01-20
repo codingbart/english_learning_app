@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SettingsScreen() {
   const { toggleTheme } = useContext(ThemeContext);
@@ -30,8 +31,14 @@ function SettingsScreen() {
     Alert.alert('Change Profile Picture', 'You can change your profile picture here.');
   };
 
-  const handleResetStats = () => {
-    Alert.alert('Reset Stats', 'Your achievements and stats have been reset.');
+  const handleResetStats = async () => {
+    try {
+      await AsyncStorage.removeItem('lastQuizScore');
+      Alert.alert('Reset Stats', 'Your achievements and stats have been reset.');
+    } catch (error) {
+      console.error('Error resetting stats:', error);
+      Alert.alert('Error', 'There was an error resetting your stats. Please try again.');
+    }
   };
 
   return (
