@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import API from '../../api/config';
 import { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function QuizScreen() {
   const [questions, setQuestions] = useState([]);
@@ -10,6 +11,7 @@ function QuizScreen() {
   const [correctOption, setCorrectOption] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -37,14 +39,19 @@ function QuizScreen() {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOption(null);
       setCorrectOption(null);
     } else {
-      Alert.alert('Koniec quizu', 'Gratulacje, ukończyłeś quiz!');
+      setQuizCompleted(true);
     }
+  };
+
+  const handleSaveScore = async () => {
+    Alert.alert('Koniec quizu', 'Gratulacje, ukończyłeś quiz!');
+    await AsyncStorage.setItem('lastQuizScore', JSON.stringify({ correctAnswers, incorrectAnswers }));
   };
 
   const handleResetQuiz = () => {
@@ -53,6 +60,7 @@ function QuizScreen() {
     setCorrectOption(null);
     setCorrectAnswers(0);
     setIncorrectAnswers(0);
+    setQuizCompleted(false);
   };
 
   const getButtonStyle = (index) => {
@@ -91,13 +99,19 @@ function QuizScreen() {
         </TouchableOpacity>
       ))}
 
-      {selectedOption !== null && (
+      {selectedOption !== null && !quizCompleted &&(
         <TouchableOpacity style={styles.nextButton} onPress={handleNextQuestion}>
           <Text style={styles.nextButtonText}>Next Question</Text>
         </TouchableOpacity>
       )}
 
-      {currentQuestionIndex === questions.length - 1 && selectedOption !== null && (
+      {quizCompleted &&(
+        <TouchableOpacity style={styles.saveButton} onPress={handleSaveScore}>
+          <Text style={styles.nextButtonText}>Zapisz wynik</Text>
+        </TouchableOpacity>
+      )}
+
+      {quizCompleted &&/*currentQuestionIndex === questions.length - 1 && selectedOption !== null &&*/ (
         <View style={styles.resultContainer}>
           <Text style={styles.resultText}>Prawidłowe odpowiedzi: {correctAnswers}</Text>
           <Text style={styles.resultText}>Błędne odpowiedzi: {incorrectAnswers}</Text>
@@ -185,6 +199,21 @@ const styles = StyleSheet.create({
   resultText: {
     fontSize: 18,
     marginBottom: 20,
+  },
+  saveButton: {
+    backgroundColor: '#4CAF50',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   resetButton: {
     backgroundColor: '#FF5722',

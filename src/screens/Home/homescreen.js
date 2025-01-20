@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text, Dimensions, Alert } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from '../../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect } from 'react';
+
 
 function HomeScreen() {
   const [userName, setUserName] = useState('');
-  const lastAchievement = '10 Flashcards Completed';
+  const [lastQuizScore, setLastQuizScore] = useState(null);
   const recentWords = ['Hello', 'World', 'React', 'Native', 'JavaScript'];
   const completionPercentage = 80;
 
@@ -30,8 +30,20 @@ function HomeScreen() {
       }
     };
 
+    const fetchLastQuizScore = async () => {
+      try {
+        const score = await AsyncStorage.getItem('lastQuizScore');
+        if (score) {
+          setLastQuizScore(JSON.parse(score));
+        }
+      } catch (error) {
+        console.error('Error fetching last quiz score:', error);
+      }
+    };
+
     handleUserName();
-  }, []);
+    fetchLastQuizScore();
+  }, [lastQuizScore]);
 
 
   const screenWidth = Dimensions.get('window').width;
@@ -46,9 +58,8 @@ function HomeScreen() {
     <View style={styles.container}>
 
       <View style={styles.card}>
-        <Icon name="account-circle" size={50} color="#555" />
+        <Icon name="account-circle" size={80} color="#555" />
         <Text style={styles.title}>Welcome, {userName}!</Text>
-        <Text style={styles.subtitle}>Last Achievement: {lastAchievement}</Text>
       </View>
 
       <View style={styles.card}>
@@ -66,8 +77,15 @@ function HomeScreen() {
 
       <View style={styles.card}>
         <Icon name="progress-check" size={30} color="#34A853" />
-        <Text style={styles.sectionTitle}>Flashcards Completion</Text>
-        <Text style={styles.percentage}>{completionPercentage}% Completed</Text>
+        <Text style={styles.cardTitle}>Wynik ostatniego quizu</Text>
+        {lastQuizScore ? (
+          <Text style={styles.cardContent}>
+            Prawidłowe odpowiedzi: {lastQuizScore.correctAnswers}{'\n'}
+            Błędne odpowiedzi: {lastQuizScore.incorrectAnswers}
+          </Text>
+        ) : (
+          <Text style={styles.cardContent}>Brak wyników</Text>
+        )}
       </View>
     </View>
   );
@@ -82,7 +100,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#fff',
-    padding: 20,
+    padding: 44,
     marginVertical: 10,
     borderRadius: 10,
     elevation: 3,
@@ -92,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     marginTop: 10,
   },
@@ -119,12 +137,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  percentage: {
-    fontSize: 18,
+  cardTitle: {
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#34A853',
-    marginTop: 5,
+    marginBottom: 10,
   },
+  cardContent: {
+    fontSize: 14,
+  }
 });
 
 export default HomeScreen;
