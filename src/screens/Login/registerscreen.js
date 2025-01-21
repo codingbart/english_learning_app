@@ -7,6 +7,7 @@ export default function RegisterScreen({navigation}){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
  
    const handleRegister =  () =>{
@@ -14,7 +15,7 @@ export default function RegisterScreen({navigation}){
       Alert.alert('Wszystkie pola muszą być uzupełnione');
       return;
     }
-    const newUser = {email, password, name};
+    const newUser = {email, password, name, profilePicture: profilePicture || "default.jpg" };
 
     API.post('/users', newUser)
     .then(response =>{

@@ -12,6 +12,8 @@ function CardsScreen() {
   const [showForm, setShowForm] = useState(false);
   const [newWord, setNewWord] = useState('');
   const [newTranslation, setNewTranslation] = useState('');
+  const [data, setData] = useState({ x:0, y:0, z:0 });
+  const [lastFlipTime, setLastFlipTime] = useState(0);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -32,6 +34,19 @@ function CardsScreen() {
 
     fetchCards();
   }, []);
+
+  useEffect(() => {
+    Accelerometer.setUpdateInterval(500);
+
+    const subscription = Accelerometer.addListener((accelerometerData) => {
+      setData(accelerometerData);
+        if(accelerometerData.y  > 1 || accelerometerData.y < -1){
+          setIsFlipped(prevState => !prevState);
+        }
+  });
+    return () => subscription && subscription.remove();
+  }, []);
+
 
   const flipCard = () => {
     setIsFlipped(!isFlipped);

@@ -8,16 +8,11 @@
       "profilePicture": "profile1.jpg"
     },
     {
-      "id": "5763",
-      "email": "Adam@123",
-      "password": "123",
-      "name": "Adam"
-    },
-    {
-      "id": "c8d0",
-      "email": "Janas@123",
-      "password": "1234",
-      "name": "Janas"
+      "id": "bf5e",
+      "email": "a",
+      "password": "a",
+      "name": "a",
+      "profilePicture": "default.jpg"
     }
   ],
   "flashcards": [

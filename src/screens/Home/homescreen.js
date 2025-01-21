@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Dimensions, Alert } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Alert, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from '../../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import * as FileSystem from 'expo-file-system';
 
 function HomeScreen() {
   const navigation = useNavigation();
   const [userName, setUserName] = useState('');
+  const [profilePicture, setProfilePicture] = useState(null);
   const [lastQuizScore, setLastQuizScore] = useState(null);
   const recentWords = ['Hello', 'World', 'React', 'Native', 'JavaScript'];
 
@@ -23,6 +25,10 @@ function HomeScreen() {
           const user = users.find((u) => u.id === userId); 
           if (user) {
             setUserName(user.name);
+            if (user.profilePicture) {
+              const fileUri = `${FileSystem.documentDirectory}${user.profilePicture}`;
+              setProfilePicture(fileUri);
+            }
           }
         }
       } catch (error) {
@@ -49,12 +55,13 @@ function HomeScreen() {
 
     const focusListener = navigation.addListener('focus', () => {
       fetchLastQuizScore();
+      handleUserName();
     });
 
     return () => {
       focusListener();
     }
-  }, [lastQuizScore]);
+  }, []);
 
 
   const screenWidth = Dimensions.get('window').width;
@@ -69,7 +76,11 @@ function HomeScreen() {
     <View style={styles.container}>
 
       <View style={styles.card}>
-        <Icon name="account-circle" size={80} color="#555" />
+      {profilePicture ? (
+          <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
+        ) : (
+          <Icon name="account-circle" size={80} color="#555" />
+        )}
         <Text style={styles.title}>Welcome, {userName}!</Text>
       </View>
 
@@ -155,6 +166,12 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     fontSize: 14,
+  },
+  profilePicture: {
+    width: 43,
+    height: 43,
+    borderRadius: 50,
+    marginVertical: 20,
   }
 });
 

@@ -2,6 +2,9 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import API from '../../api/config';
 
 function SettingsScreen() {
   const { toggleTheme } = useContext(ThemeContext);
@@ -13,12 +16,29 @@ function SettingsScreen() {
     setIsNameChanging(true);
   };
 
-  const handleSaveName = () => {
+  const handleSaveName = async () => {
     if (newName.trim() === '') {
       Alert.alert('Error', 'Please enter a valid name.');
       return;
     }
-    Alert.alert('Success', `Your name has been changed to ${newName}`);
+
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      if (userId) {
+        const response = await API.get('/users');
+        const users = response.data;
+        const user = users.find((u) => u.id === userId);
+        if (user) {
+          user.name = newName;
+          await API.put(`/users/${userId}`, user);
+          Alert.alert('Success', `Your name has been changed to ${newName}`);
+        }
+      }
+    } catch (error) {
+      console.error('Error updating name:', error);
+      Alert.alert('Error', 'There was an error updating your name. Please try again.');
+    }
+
     setIsNameChanging(false);
     setNewName('');
   };
@@ -27,8 +47,45 @@ function SettingsScreen() {
     toggleTheme();
   };
 
-  const handleChangeProfilePicture = () => {
-    Alert.alert('Change Profile Picture', 'You can change your profile picture here.');
+  const handleChangeProfilePicture = async () => {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+  if (status !== 'granted') {
+    Alert.alert('Permission to access camera is required!');
+    return;
+  }
+
+  const result = await ImagePicker.launchCameraAsync({
+    allowsEditing: true,
+    aspect: [1, 1],
+    quality: 1,
+  });
+
+  if (!result.cancelled) {
+    const userId = await AsyncStorage.getItem('userId');
+    if (userId) {
+      const fileName = `${userId}_profile.jpg`;
+      const fileUri = `${FileSystem.documentDirectory}${fileName}`;
+
+      await FileSystem.copyAsync({
+        from: result.uri,
+        to: fileUri,
+      });
+
+      try {
+        const response = await API.get('/users');
+        const users = response.data;
+        const user = users.find((u) => u.id === userId);
+        if (user) {
+          user.profilePicture = fileName; // Zapisz pełną ścieżkę do zdjęcia
+          await API.put(`/users/${userId}`, user);
+          Alert.alert('Success', 'Profile picture updated successfully.');
+        }
+      } catch (error) {
+        console.error('Error updating profile picture:', error);
+        Alert.alert('Error', 'There was an error updating your profile picture. Please try again.');
+      }
+    }
+  }
   };
 
   const handleResetStats = async () => {
