@@ -2,12 +2,15 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import React, { useState, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
-import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
+import * as Updates from 'expo-updates';
 import API from '../../api/config';
 
 function SettingsScreen() {
   const { toggleTheme } = useContext(ThemeContext);
+  const navigation = useNavigation();
 
   const [newName, setNewName] = useState('');
   const [isNameChanging, setIsNameChanging] = useState(false);
@@ -47,45 +50,114 @@ function SettingsScreen() {
     toggleTheme();
   };
 
-  const handleChangeProfilePicture = async () => {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-  if (status !== 'granted') {
-    Alert.alert('Permission to access camera is required!');
-    return;
-  }
+  const handleChangeProfilePicture = () => {
+    Alert.alert(
+      'Change Profile Picture',
+      'Choose an option',
+      [
+        {
+          text: 'Camera',
+          onPress: handleTakePhoto,
+        },
+        {
+          text: 'Gallery',
+          onPress: handlePickProfilePicture,
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
-  const result = await ImagePicker.launchCameraAsync({
-    allowsEditing: true,
-    aspect: [1, 1],
-    quality: 1,
-  });
-
-  if (!result.cancelled) {
-    const userId = await AsyncStorage.getItem('userId');
-    if (userId) {
-      const fileName = `${userId}_profile.jpg`;
-      const fileUri = `${FileSystem.documentDirectory}${fileName}`;
-
-      await FileSystem.copyAsync({
-        from: result.uri,
-        to: fileUri,
-      });
-
+  const handleTakePhoto = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission to access camera is required!');
+      return;
+    }
+  
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+  
+    if (!result.canceled) {
+      const pickedImageUri = result.assets[0]?.uri;
+  
+      if (!pickedImageUri) {
+        Alert.alert('Error', 'Could not retrieve the image URI.');
+        return;
+      }
+  
       try {
-        const response = await API.get('/users');
-        const users = response.data;
-        const user = users.find((u) => u.id === userId);
-        if (user) {
-          user.profilePicture = fileName; // Zapisz pełną ścieżkę do zdjęcia
-          await API.put(`/users/${userId}`, user);
-          Alert.alert('Success', 'Profile picture updated successfully.');
+        const asset = await MediaLibrary.createAssetAsync(pickedImageUri); 
+  
+        const userId = await AsyncStorage.getItem('userId');
+        if (userId) {
+          const response = await API.get('/users');
+          const users = response.data;
+          const user = users.find((u) => u.id === userId);
+          if (user) {
+            user.profilePicture = asset.uri; 
+            await API.put(`/users/${userId}`, user);
+            Alert.alert('Success', 'Profile picture updated successfully.');
+
+            navigation.navigate('HomeTab', { screen: 'Home' });
+          }
         }
       } catch (error) {
         console.error('Error updating profile picture:', error);
         Alert.alert('Error', 'There was an error updating your profile picture. Please try again.');
       }
     }
-  }
+  };
+
+  const handlePickProfilePicture = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission to access media library is required!');
+      return;
+    }
+  
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+  
+    if (!result.canceled) {
+      const pickedImageUri = result.assets[0]?.uri;
+  
+      if (!pickedImageUri) {
+        Alert.alert('Error', 'Could not retrieve the image URI.');
+        return;
+      }
+  
+      try {
+        const asset = await MediaLibrary.createAssetAsync(pickedImageUri); 
+  
+        const userId = await AsyncStorage.getItem('userId');
+        if (userId) {
+          const response = await API.get('/users');
+          const users = response.data;
+          const user = users.find((u) => u.id === userId);
+          if (user) {
+            user.profilePicture = asset.uri; 
+            await API.put(`/users/${userId}`, user);
+            Alert.alert('Success', 'Profile picture updated successfully.');
+
+            navigation.navigate('HomeTab', { screen: 'Home' });
+          }
+        }
+      } catch (error) {
+        console.error('Error updating profile picture:', error);
+        Alert.alert('Error', 'There was an error updating your profile picture. Please try again.');
+      }
+    }
   };
 
   const handleResetStats = async () => {
@@ -97,6 +169,17 @@ function SettingsScreen() {
       Alert.alert('Error', 'There was an error resetting your stats. Please try again.');
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('userId');
+      Alert.alert('Success', 'You have been logged out.');
+      await Updates.reloadAsync();
+    } catch (error) {
+      console.error('Error logging out:', error);
+      Alert.alert('Error', 'There was an error logging out. Please try again.');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -127,6 +210,9 @@ function SettingsScreen() {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleResetStats}>
             <Text style={styles.buttonText}>Reset Stats and Achievements</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLogout}>
+            <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
         </View>
       )}

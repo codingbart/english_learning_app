@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, Dimensions, Alert, Image } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Alert, Image, ScrollView} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from '../../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
+
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -19,15 +21,18 @@ function HomeScreen() {
     const handleUserName = async () => {
       try {
         const userId = await AsyncStorage.getItem('userId');
-        if(userId){
+        if (userId) {
           const response = await API.get('/users');
           const users = response.data;
-          const user = users.find((u) => u.id === userId); 
+          const user = users.find((u) => u.id === userId);
           if (user) {
             setUserName(user.name);
             if (user.profilePicture) {
-              const fileUri = `${FileSystem.documentDirectory}${user.profilePicture}`;
-              setProfilePicture(fileUri);
+              console.log('Loaded profile picture URI:', user.profilePicture);
+              const resolvedUri = await resolveMediaLibraryUri(user.profilePicture);
+              setProfilePicture(resolvedUri || require('../../../assets/default.jpg')); 
+            }else{
+              setProfilePicture(require('../../../assets/default.jpg'));
             }
           }
         }
@@ -61,7 +66,35 @@ function HomeScreen() {
     return () => {
       focusListener();
     }
+    
   }, []);
+
+  const resolveMediaLibraryUri = async (uri) => {
+    try {
+      if (uri.startsWith('ph://')) {
+        const assetInfo = await MediaLibrary.getAssetInfoAsync(uri);
+        if (assetInfo && assetInfo.localUri) {
+          return assetInfo.localUri; 
+        } else {
+          const fileUri = `${FileSystem.documentDirectory}profile_${Date.now()}.jpg`;
+          const fileInfo = await FileSystem.getInfoAsync(fileUri); 
+          if(!fileInfo.exists){
+          await FileSystem.copyAsync({
+            from: uri,
+            to: fileUri,
+          });
+        }
+          return fileUri;
+        }
+      } else {
+        return uri; 
+      }
+    } catch (error) {
+      console.log('Error resolving URI:', error);
+      return null;
+    }
+  };
+  
 
 
   const screenWidth = Dimensions.get('window').width;
@@ -74,13 +107,20 @@ function HomeScreen() {
 
   return (
     <View style={styles.container}>
-
+      <ScrollView>
       <View style={styles.card}>
       {profilePicture ? (
-          <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
-        ) : (
-          <Icon name="account-circle" size={80} color="#555" />
-        )}
+            <Image
+              source={typeof profilePicture === 'string' ? { uri: profilePicture } : profilePicture}
+              style={styles.profilePicture}
+              onError={() => {
+                console.error('Failed to load profile picture');
+                setProfilePicture(require('../../../assets/default.jpg')); 
+              }}
+            />
+          ) : (
+            <Icon name="account-circle" size={80} color="#555" />
+          )}
         <Text style={styles.title}>Welcome, {userName}!</Text>
       </View>
 
@@ -109,6 +149,7 @@ function HomeScreen() {
           <Text style={styles.cardContent}>Brak wyników</Text>
         )}
       </View>
+      </ScrollView>
     </View>
   );
 }
@@ -168,9 +209,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   profilePicture: {
-    width: 43,
-    height: 43,
-    borderRadius: 50,
+    width: 120,
+    height: 120,
+    borderRadius: 40,
     marginVertical: 20,
   }
 });

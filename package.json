@@ -18,6 +18,8 @@
     "expo": "^52.0.26",
     "expo-async-storage": "^0.0.0",
     "expo-async-store": "^0.0.0",
+    "expo-camera": "^16.0.14",
+    "expo-image-picker": "~16.0.4",
     "expo-secure-store": "^14.0.1",
     "expo-sensors": "~14.0.2",
     "expo-status-bar": "^2.0.1",
@@ -36,8 +38,8 @@
     "react-native-vector-icons": "^10.2.0",
     "secure-store": "^0.0.1",
     "update": "^0.7.4",
-    "expo-image-picker": "~16.0.4",
-    "expo-camera": "~16.0.13"
+    "expo-media-library": "~17.0.5",
+    "expo-updates": "~0.26.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

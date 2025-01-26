@@ -5,14 +5,14 @@
       "email": "123",
       "password": "123",
       "name": "Bartek",
-      "profilePicture": "profile1.jpg"
+      "profilePicture": "ph://BAD89BE7-B037-4664-95B3-75C395C8F42F/L0/001"
     },
     {
       "id": "bf5e",
       "email": "a",
       "password": "a",
       "name": "a",
-      "profilePicture": "default.jpg"
+      "profilePicture": "ph://4471907A-8EBE-4E70-8F91-17E0635B2BD8/L0/001"
     }
   ],
   "flashcards": [
