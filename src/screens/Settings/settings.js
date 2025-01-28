@@ -129,35 +129,7 @@ function SettingsScreen() {
       quality: 1,
     });
   
-    if (!result.canceled) {
-      const pickedImageUri = result.assets[0]?.uri;
-  
-      if (!pickedImageUri) {
-        Alert.alert('Error', 'Could not retrieve the image URI.');
-        return;
-      }
-  
-      try {
-        const asset = await MediaLibrary.createAssetAsync(pickedImageUri); 
-  
-        const userId = await AsyncStorage.getItem('userId');
-        if (userId) {
-          const response = await API.get('/users');
-          const users = response.data;
-          const user = users.find((u) => u.id === userId);
-          if (user) {
-            user.profilePicture = asset.uri; 
-            await API.put(`/users/${userId}`, user);
-            Alert.alert('Success', 'Profile picture updated successfully.');
 
-            navigation.navigate('HomeTab', { screen: 'Home' });
-          }
-        }
-      } catch (error) {
-        console.error('Error updating profile picture:', error);
-        Alert.alert('Error', 'There was an error updating your profile picture. Please try again.');
-      }
-    }
   };
 
   const handleResetStats = async () => {
