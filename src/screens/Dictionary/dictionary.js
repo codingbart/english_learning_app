@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import Icon from 'react-native-ico-font-awesome'
 import API from '../../api/config';
 
 function DictionaryScreen() {
