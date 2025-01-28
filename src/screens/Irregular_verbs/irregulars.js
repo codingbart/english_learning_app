@@ -1,12 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Text, Alert} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import API from '../../api/config';
-
-const irregularVerbs = async () => [
-  
-];
-
 function IrregularsScreen() {
   
   const[irregularVerbs, setIrregularVerbs] = useState([]);
