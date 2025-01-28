@@ -239,7 +239,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 12, // Rounded corners for header
     width: '100%',
-    marginBottom: 30,
   },
   buttonContainer: {
     width: '80%',
