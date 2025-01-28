@@ -8,12 +8,11 @@ function CardsScreen() {
   const [isFlipped, setIsFlipped] = useState(false); 
   const [cards, setCards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [word, setWord] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [newWord, setNewWord] = useState('');
   const [newTranslation, setNewTranslation] = useState('');
   const [data, setData] = useState({ x:0, y:0, z:0 });
-  const [lastFlipTime, setLastFlipTime] = useState(0);
+
 
   useEffect(() => {
     const fetchCards = async () => {
