@@ -83,9 +83,9 @@ function QuizScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.questionContainer}>
-        <Text style={styles.questionNumber}>Question {currentQuestionIndex + 1} of {questions.length}</Text>
-        <Text style={styles.questionText}>{currentQuestion.question}</Text>
+      <View style={styles.card}>
+        <Text style={styles.cardText}>Question {currentQuestionIndex + 1} of {questions.length}</Text>
+        <Text style={styles.cardText}>{currentQuestion.question}</Text>
       </View>
 
       {currentQuestion.options.map((option, index) => (
@@ -133,16 +133,25 @@ const styles = StyleSheet.create({
     // backgroundColor: '#f9f9f9',
     padding: 20,
   },
-  questionContainer: {
-    marginBottom: 20,
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 5,
+    elevation: 3,
+    width: 220,
+    height: 150,
   },
-  questionNumber: {
-    fontSize: 18,
+  cardText: {
+    fontSize: 16,
+    marginBottom: 15,
+    textAlign: 'center',
     fontWeight: 'bold',
-  },
-  questionText: {
-    fontSize: 20,
-    marginVertical: 10,
   },
   option: {
     backgroundColor: '#fff',
