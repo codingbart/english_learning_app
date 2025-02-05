@@ -13,7 +13,7 @@ function DictionaryScreen() {
         Alert.alert('Błąd', 'Proszę wpisać słowo.');
         return;
       }
-      
+
       const response = await API.get(`/dictionary`);
       const dictionaryData = response.data;
   
@@ -40,7 +40,7 @@ function DictionaryScreen() {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder={isPolishToEnglish ? 'Wpisz słowo po angielsku' : 'Wpisz słowo po polsku'}
+        placeholder={'Wpisz słowo'}
         value={word}
         onChangeText={setWord}
       />
