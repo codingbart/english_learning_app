@@ -8,35 +8,32 @@ function DictionaryScreen() {
   const [isPolishToEnglish, setIsPolishToEnglish] = useState(true);
   
   const handleSearch = async () => {
-    try{
-      if (word.trim()=== '') {
+    try {
+      if (word.trim() === '') {
         Alert.alert('Błąd', 'Proszę wpisać słowo.');
         return;
       }
-
-      const query = isPolishToEnglish
-        ? `?word=${encodeURIComponent(word)}`
-        : `?translation=${encodeURIComponent(word)}`;
-
-      const response = await API.get(`/dictionary${query}`);
-      console.log('API: ', response.data);
-      if (response.data.length > 0) {
-        const translationData = isPolishToEnglish ? response.data[0].translation : response.data[0].word;
+      
+      const response = await API.get(`/dictionary`);
+      const dictionaryData = response.data;
+  
+      const filteredData = dictionaryData.filter(entry => 
+        entry.word.toLowerCase() === word.toLowerCase() || entry.translation.toLowerCase() === word.toLowerCase()
+      );
+  
+      if (filteredData.length > 0) {
+        const translationData = filteredData[0].word.toLowerCase() === word.toLowerCase() 
+          ? filteredData[0].translation 
+          : filteredData[0].word;
         setTranslation(translationData);
       } else {
         Alert.alert('Błąd', 'Nie znaleziono tłumaczenia.');
         setTranslation('');
       }
-    }catch(error){
+    } catch (error) {
       console.error('Search error:', error);
       Alert.alert('Nie udało się wyszukać tłumaczenia. Spróbuj ponownie.');
     }
-  }  
-
-  const toggleTranslationDirection = () => {
-    setIsPolishToEnglish(!isPolishToEnglish);
-    setTranslation(''); 
-    setWord('');
   };
   
   return (
@@ -49,11 +46,6 @@ function DictionaryScreen() {
       />
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
         <Text style={styles.searchButtonText}>🔍 Szukaj</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.toggleButton} onPress={toggleTranslationDirection}>
-        <Text style={styles.toggleButtonText}>
-          {isPolishToEnglish ? 'EN -> PL' : 'PL -> EN'}
-        </Text>
       </TouchableOpacity>
       {translation !== '' && (
         <View style={styles.translationContainer}>
